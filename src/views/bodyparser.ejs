@@ -1,0 +1,45 @@
+<html>
+
+<head>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var email, pass;
+            $("#submit").click(function () {
+                var reqobj = {
+                    email: $("#email").val(),
+                    pass: $("#password").val()
+                };
+
+                email = $("#email").val();
+                pass = $("#password").val();
+                /*
+                * Perform some validation here.
+                */
+                
+                $.ajax({
+                    url: 'http://localhost:3000/login',
+                    method: 'POST',
+                    dataType : "json",
+                    data: JSON.stringify(reqobj),
+                    contentType: "application/json; charset=utf-8",
+                    success: function() {
+                        if (data === 'done') {
+                            //window.location.href = "/";
+                        }   
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <input type="text" size="40" placeholder="Type your email" id="email"><br />
+    <input type="password" size="40" placeholder="Type your password" id="password"><br />
+    <input type="button" value="Submit" id="submit">
+</body>
+
+</html>

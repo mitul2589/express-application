@@ -13,10 +13,13 @@ app.use(session({
         //secure: true,
         httpOnly: true,
         maxAge: 2000000
-    }
+    },
+    resave: true,
+    saveUninitialized: true
 }));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
@@ -45,27 +48,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');    
+    res.render('bodyparser');    
 });
 
 app.post('/login', (req, res) => {
+    console.log("req.body" + req.body.email);
     sess = req.session;
     sess.email = req.body.email;
     res.end("done");
 });
 
-app.get('/logout', (req, res) => {
-   req.session.destroy((err) => {
-       if (err) return console.log(err);
-       res.redirect('/login');
-   });
-});
-
-app.get('/books', (req, res) => {
-    res.send("Books...");
-});
-
 app.listen(3000);
-
-//s%3AtFy4-XlwZluJ6ZR2uVqByMaSO0JH1LUi.%2FZuE2208l2Z2OrRTAaW950Nai7OAT5JUKLCy77cwm7U
-//s%3A8CYmOyIDsW3LYyWsV-XH6TU3yP-6a4Bx.S2KsPmXoOKHk%2FXFRq5OkNLmN%2Fn8qWMF5kfVTU5KJ2SI
