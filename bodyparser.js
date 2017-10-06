@@ -19,7 +19,7 @@ app.use(session({
 }));
 
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
@@ -28,7 +28,7 @@ app.use(express.static('public'));
 
 app.set('views', path.join(__dirname + '/src/views'));
 app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
+//app.engine('html', require('ejs').renderFile);
 
 var sess;
 
@@ -38,24 +38,45 @@ var drinks = [
     { name: 'Scotch', drunkness: 10 }
 ];
 
+app.use((req, res, next) => {
+    console.log("Start Request...");
+    next();
+});
+
 app.get('/', (req, res) => {
     sess = req.session;
     if (sess.email) {
-        res.render('index', {title: 'vx', drinks: drinks});
+        res.render('index', { title: 'Body Parser', drinks: drinks });
     } else {
         res.redirect('/login');
-    }    
+    }
 });
 
 app.get('/login', (req, res) => {
-    res.render('bodyparser');    
+    res.render('bodyparser');
 });
 
 app.post('/login', (req, res) => {
-    console.log("req.body" + req.body.email);
+    console.log("req.body.email ----> " + req.body.email);
     sess = req.session;
     sess.email = req.body.email;
     res.end("done");
+});
+
+app.get('/books', (req, res, next) => {
+    res.writeHead(200, { "content-type": "text/html" }); // to render html content
+    res.write("<strong>Books first route</strong><br/>");
+    next(); // pass control to next matching route
+    //res.end(); // will not pass control to next matching route
+});
+
+app.get('/books', (req, res) => {
+    res.write("Books second route");
+    res.end();
+});
+
+app.all('*', (req, res, next) => {
+    res.end("for all route");
 });
 
 app.listen(3000);
