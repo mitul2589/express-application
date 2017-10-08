@@ -6,7 +6,6 @@ var fs = require('fs');
    setTimeout(() => console.log("setTimeout-1"));
    setImmediate(() => console.log("setImmediate-1"));
 });
-
 setTimeout(() => console.log("setTimeout-2"));
 setImmediate(() => console.log("setImmediate-2"));
 */
@@ -25,14 +24,12 @@ function foo () {
         setImmediate(function () {
             console.log("setImmediate");
         });
-
         
         
         
         setTimeout(function () {
             console.log("setTimeout");
         });
-
         //process.nextTick(foo);
     } else {
         var end = new Date();
@@ -73,7 +70,6 @@ setImmediate(function A() {
         setImmediate(function G() { console.log(6); });
     });
 });
-
 setTimeout(function timeout() {
     console.log('TIMEOUT FIRED');
 }, 0);
@@ -81,13 +77,11 @@ setTimeout(function timeout() {
 
 /*
 let bar;
-
 // this has an asynchronous signature, but calls callback synchronously
 function someAsyncApiCall(callback) {
     process.nextTick(callback); 
     
 }
-
 // the callback is called before `someAsyncApiCall` completes.
 someAsyncApiCall(() => {
     // since someAsyncApiCall has completed, bar hasn't been assigned any value
@@ -97,7 +91,6 @@ someAsyncApiCall(() => {
     console.log('bar', bar); // undefined
     
 });
-
 bar = 1;
 */
 
@@ -116,4 +109,3 @@ const myEmitter = new MyEmitter();
 myEmitter.on('event', () => {
   console.log('an event occurred!');
 });
-
