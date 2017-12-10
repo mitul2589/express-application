@@ -45,7 +45,7 @@ async.waterfall([
 var q = async.queue(function (task, callback) {
   setTimeout(() => console.log(task.name), task.delay)
   callback()
-}, 2)
+}, 1)
 
 // assign a callback
 q.drain = function () {
@@ -54,7 +54,7 @@ q.drain = function () {
 
 // add some items to the queue
 
-q.push({name: 'foo', delay: 2000}, function (err) {
+q.push({name: 'foo', delay: 3000}, function (err) {
   console.log('finished processing foo')
 })
 q.push({name: 'bar', delay: 2000}, function (err) {

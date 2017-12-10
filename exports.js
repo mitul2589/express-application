@@ -1,4 +1,7 @@
-exports.id = 23;
-exports.myFunc = function() {
-    console.log("dg");
+exports.myDateTime = function() {
+    return new Date();
+}
+
+exports.getWidth = function () {
+    return 2300;
 }

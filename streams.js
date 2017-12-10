@@ -1,6 +1,6 @@
 //process.stdin.pipe().pipe(process.stdout);
 
-/* const { Readable } = require('stream');
+ /*const { Readable } = require('stream');
 
 const inStream = new Readable({
     read(size) {
@@ -13,7 +13,7 @@ const inStream = new Readable({
   inStream.currentCharCode = 65;
   inStream.pipe(process.stdout); */
 
-  /* const { Duplex } = require('stream');
+  const { Duplex } = require('stream');
   
   const inoutStream = new Duplex({
     write(chunk, encoding, callback) {
@@ -30,9 +30,9 @@ const inStream = new Readable({
   }); 
   
   inoutStream.currentCharCode = 65;
-  process.stdin.pipe(inoutStream).pipe(process.stdout); */
+  process.stdin.pipe(inoutStream).pipe(process.stdout); 
 
-  const { Transform } = require('stream');
+  /*const { Transform } = require('stream');
   
   const upperCaseTr = new Transform({
     transform(chunk, encoding, callback) {
@@ -41,4 +41,4 @@ const inStream = new Readable({
     }
   });
   
-  process.stdin.pipe(upperCaseTr).pipe(process.stdout);
+  process.stdin.pipe(upperCaseTr).pipe(process.stdout);*/
